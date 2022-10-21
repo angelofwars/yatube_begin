@@ -15,4 +15,4 @@ def index(request):
 
 # view-функция принимает параметр slug из path()
 def group_posts(request, slug):
-    return HttpResponse(f'Мороженое номер {slug}')
+    return render(request, 'posts/group_list.html')
