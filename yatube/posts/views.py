@@ -1,15 +1,17 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+# Импортируем модель, чтобы обратиться к ней
+from .models import Post
+
+
 # Главная страница
 def index(request):
     title = 'Yatube - соцсеть для разработчиков'
+    posts = Post.objects.order_by('-pub_date')[:10]
     context = {
+        'posts': posts,
         'title': title,
-        # А можно сразу записать значение в словарь. Но обычно так не делают
-        'text': 'Главная страница',
     }
     return render(request, 'posts/index.html', context)
-
 
 
 
