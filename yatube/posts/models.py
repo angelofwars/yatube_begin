@@ -1,7 +1,17 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models import CharField
 
 User = get_user_model()
+
+
+class Group(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    description = models.TextField()
+
+    def __str__(self) -> CharField:
+        return self.title
 
 
 class Post(models.Model):
@@ -12,11 +22,10 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-
-class Group(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-    description = models.TextField()
-
-    def __str__(self) -> str:
-        return self.title
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.CASCADE,
+        related_name='posts',
+        blank=True,
+        null=True
+    )

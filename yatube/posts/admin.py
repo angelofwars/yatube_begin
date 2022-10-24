@@ -23,7 +23,6 @@ class GroupAdmin(admin.ModelAdmin):
         'title',
         'slug',
     )
-
     empty_value_display = '-пусто-'
 
 
